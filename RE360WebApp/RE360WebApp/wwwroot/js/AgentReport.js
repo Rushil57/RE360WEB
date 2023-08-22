@@ -1,10 +1,12 @@
 ﻿//var app = angular.module('MyAppAgentReport', [])
+var baseUrl = "https://localhost:7093";
 var app = angular.module('MyAppAgentReport', ['toaster', 'ngAnimate'])
     .directive('validationErrorToast', function () {
 
     })
 app.controller('AgentReportController', function ($scope, $http, $window, $timeout, toaster) {
     $scope.init = function () {
+        $scope.GetBaseUrl()
         $scope.imgloader = false;
         $scope.AgentDetail = null;
         $scope.GetAgentReport()
@@ -21,7 +23,7 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             $scope.todos.push({ text: "todo " + i, done: false });
         }
     };
-  
+
     $scope.GetAgentReport = function () {
         $scope.showImgLoader();
         var post = $http({
@@ -67,9 +69,9 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
     }
     $scope.redirectRegi = function (AgentID) {
         if (AgentID == "") {
-            $window.location.href = "https://localhost:7093/Agent/agentRegistration";
+            $window.location.href = baseUrl + "/Agent/agentRegistration";
         } else {
-            $window.location.href = "https://localhost:7093/Agent/agentRegistration?AgentID=" + AgentID;
+            $window.location.href = baseUrl + "/Agent/agentRegistration?AgentID=" + AgentID;
         }
     }
     $scope.DeleteAgentByID = function (AgentID) {
@@ -122,6 +124,23 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             bodyOutputType: 'template',
             showCloseButton: true,
             toasterId: 'page-validation'
+        });
+    }
+    $scope.GetBaseUrl = function () {
+        var post = $http({
+            method: "GET",
+            url: "/User/GetBaseUrl",
+            dataType: 'json',
+            data: null,
+            headers: { "Content-Type": "application/json" }
+        });
+        post.success(function (data, status) {
+            if (data.data != null) {
+                baseUrl = data;
+            }
+        });
+        post.error(function (data, status) {
+            $scope.popError('Something Went Wrong');
         });
     }
 });

@@ -1,9 +1,11 @@
-﻿var app = angular.module('MyApp', ['toaster', 'ngAnimate'])
-app.controller('MyController', function ($scope, $http, $window, $timeout,toaster) {
+﻿var app = angular.module('MyAppAdmin', ['toaster', 'ngAnimate'])
+var baseUrl = "https://localhost:7093";
+app.controller('AdminController', function ($scope, $http, $window, $timeout,toaster) {
     $scope.init = function () {
         $scope.UserName = "";
         $scope.Password = "";
         $scope.imgloader = false;
+        $scope.GetBaseUrl()
     }
     $scope.LoginAdmin = function () {
         if ($scope.regForm.$valid) {
@@ -54,5 +56,21 @@ app.controller('MyController', function ($scope, $http, $window, $timeout,toaste
             toasterId: 'page-validation'
         });
     }
-
+    $scope.GetBaseUrl = function () {
+        var post = $http({
+            method: "GET",
+            url: "/User/GetBaseUrl",
+            dataType: 'json',
+            data: null,
+            headers: { "Content-Type": "application/json" }
+        });
+        post.success(function (data, status) {
+            if (data.data != null) {
+                baseUrl = data;
+            }
+        });
+        post.error(function (data, status) {
+            $scope.popError('Something Went Wrong');
+        });
+    }
 });

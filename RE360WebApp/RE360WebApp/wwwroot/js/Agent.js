@@ -1,5 +1,6 @@
-﻿var app = angular.module('MyApp', ['toaster', 'ngAnimate'])
-app.controller('MyController', function ($scope, $http, $window, $timeout, toaster) {
+﻿var app = angular.module('MyAppAgentReg', ['toaster', 'ngAnimate'])
+var baseUrl = "https://localhost:7093";
+app.controller('AgentRegController', function ($scope, $http, $window, $timeout, toaster) {
     $scope.init = function (AgentID) {
         $scope.AgentID = "";
         $scope.Model = "";
@@ -7,6 +8,7 @@ app.controller('MyController', function ($scope, $http, $window, $timeout, toast
         $scope.ShowSalePricePer = false;
         $scope.imgloader = false;
         $scope.AgentID = AgentID;
+        $scope.GetBaseUrl()
         $scope.GetUserDetails();
     }
     $scope.GetUserDetails = function () {
@@ -48,7 +50,7 @@ app.controller('MyController', function ($scope, $http, $window, $timeout, toast
                 $scope.stopImgLoader();
                 if (data.status == "200") {
                     $scope.popSuccess(data.message);
-                    $window.location.href = "https://localhost:7093/Agent/AgentReport";
+                    $window.location.href = baseUrl + "/Agent/AgentReport";
                 } else {
                     $scope.popError(data.message);
                 }
@@ -93,10 +95,9 @@ app.controller('MyController', function ($scope, $http, $window, $timeout, toast
     $scope.showImgLoader = function () {
         $scope.imgloader = true;
         $scope.gifName = 'Saving...';
-
-        //$timeout(function () {
-        //    $scope.stopImgLoader();
-        //}, 5000);
+        $timeout(function () {
+            $scope.stopImgLoader();
+        }, 50);
     }
     $scope.stopImgLoader = function () {
         $scope.imgloader = false;
@@ -123,5 +124,21 @@ app.controller('MyController', function ($scope, $http, $window, $timeout, toast
         });
 
     }
-
+    $scope.GetBaseUrl = function () {
+        var post = $http({
+            method: "GET",
+            url: "/User/GetBaseUrl",
+            dataType: 'json',
+            data: null,
+            headers: { "Content-Type": "application/json" }
+        });
+        post.success(function (data, status) {
+            if (data.data != null) {
+                baseUrl = data;
+            }
+        });
+        post.error(function (data, status) {
+            $scope.popError('Something Went Wrong');
+        });
+    }
 });

@@ -76,6 +76,17 @@ namespace RE360WebApp.Controllers
                 throw;
             }
         }
-        
+
+        [HttpGet]
+        public IActionResult GetBaseUrl()
+        {
+            var request = HttpContext.Request;
+
+            //var baseUrl = $"{request.Scheme}://{request.Host}:{request.PathBase.ToUriComponent()}";
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+
+            return Ok(baseUrl);
+        }
+
     }
 }

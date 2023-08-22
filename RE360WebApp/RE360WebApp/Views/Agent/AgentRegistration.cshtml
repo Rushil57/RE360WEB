@@ -2,10 +2,17 @@
 @{
     Layout = "~/Views/PartialView/Layout.cshtml";
 }
-
+<style>
+    input[type=text]:disabled {
+        background: #dddddd;
+    }
+    input[type=email]:disabled {
+        background: #dddddd;
+    }
+</style>
 <link rel="stylesheet" href="~/css/StyleRegister.css" asp-append-version="true" />
 <script src="~/js/Agent.js"></script>
-<div ng-app="MyApp" class="" ng-controller="MyController" ng-init="init('@Model')" style="margin-left: 380px;width: 744px; height: auto; padding-bottom: 41px; background: white; flex-direction: column; justify-content: flex-start; align-items: center; gap: 40px; display: inline-flex">
+<div ng-app="MyAppAgentReg" class="" ng-controller="AgentRegController" ng-init="init('@Model')" style="margin-left: 380px;width: 744px; height: auto; padding-bottom: 41px; background: white; flex-direction: column; justify-content: flex-start; align-items: center; gap: 40px; display: inline-flex">
     <div class="OfficialLogoRe360" style="">
         <div class="Group" style="width: 117.80px; height: 117.80px; position: relative">
             <img src="~/images/logore360.png" />
@@ -19,16 +26,16 @@
         <form name="regForm" novalidate>
             <div class="FormFields" style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 24px; display: flex">
                 <div class="DefaultFormFields">
-                    <input type="email" id="txtEmail" name="email" [disabled]="AgentID!=''" ng-model="Model.email" ng-pattern="/^[^\s]+[^\s]+\.[^\s]{2,}$/" required placeholder="Email ID" class="DefaultFormFieldsLabel" />
+                    <input type="email" id="txtEmail" name="email" ng-disabled="AgentID!=''" ng-model="Model.email" ng-pattern="/^[^\s]+[^\s]+\.[^\s]{2,}$/" required placeholder="Email ID" class="DefaultFormFieldsLabel" />
                     <span class="text-danger" ng-show="(regForm.$submitted || regForm.email.$touched) && regForm.email.$error.required">Email ID is required.</span>
                     <span class="text-danger" ng-show="regForm.email.$dirty && regForm.email.$error.pattern">Please Enter Valid Email.</span>
                 </div>
                 <div class="DefaultFormFields">
-                    <input type="text" id="txtFirstName" name="firstName" [disabled]="AgentID!=''" required ng-model="Model.firstName" placeholder="First name" class="DefaultFormFieldsLabel" />
+                    <input type="text" id="txtFirstName" name="firstName" ng-disabled="AgentID!=''" required ng-model="Model.firstName" placeholder="First name" class="DefaultFormFieldsLabel" />
                     <span class="text-danger" ng-show="(regForm.$submitted || regForm.firstName.$touched) && regForm.firstName.$error.required">First name is required.</span>
                 </div>
                 <div class="DefaultFormFields">
-                    <input type="text" id="txtLastName" name="lastName" [disabled]="AgentID!=''" ng-required="true" ng-model="Model.lastName" placeholder="Last name" class="DefaultFormFieldsLabel" />
+                    <input type="text" id="txtLastName" name="lastName" ng-disabled="AgentID!=''" ng-required="true" ng-model="Model.lastName" placeholder="Last name" class="DefaultFormFieldsLabel" />
                     <span class="text-danger" ng-show="(regForm.$submitted || regForm.lastName.$touched) && regForm.lastName.$error.required">Last name is required.</span>
                 </div>
                 <div class="DefaultFormFields">
