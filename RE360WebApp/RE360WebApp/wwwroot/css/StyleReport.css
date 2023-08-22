@@ -1,0 +1,126 @@
+.TopNavigation {
+    align-self: stretch;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background: white;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.04);
+    border-bottom: 0.40px #E0E0DE solid;
+    justify-content: space-between;
+    align-items: center;
+    gap: 171px;
+    display: inline-flex;
+}
+
+.OfficialLogoRe360 {
+    width: 52px;
+    height: 52px;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.Group {
+    margin-left: 24px;
+    width: 107px;
+    height: 65px;
+    position: relative;
+    /* border: 1px solid black; */
+}
+
+.ListOfClient {
+    align-self: stretch;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    display: inline-flex;
+}
+
+.ClientList {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    display: flex;
+}
+
+.ListView {
+    width: 684px;
+    height: 112px;
+    background: #FBFBFA;
+    box-shadow: 0px 0px 12px rgba(0, 31, 73, 0.06);
+    border-radius: 8px;
+    border: 0.40px #E0E0DE solid;
+}
+.ListView2 {
+    width: 684px;
+    height: 112px;
+    background: #E6F7FD;
+    box-shadow: 0px 0px 12px rgba(0, 31, 73, 0.06);
+    border-radius: 8px;
+    border: 0.40px #009ED9 solid;
+}
+.UserDetails {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    display: flex;
+}
+
+.ClientDiv {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    display: inline-flex;
+    margin-left: 10px;
+}
+
+.UserSolid {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.pagination {
+    display: inline-block;
+}
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+button.toast-button {
+    float: right;
+}
+.preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: rgba(255, 255, 255,0.5);
+    transition: all 0.6s ease-out;
+    width: 100%;
+    height: 100vh;
+}
+
+    .preloader img {
+        height: 60px;
+        width: 60px;
+        position: fixed;
+        top: calc(50% - 60px);
+        left: calc(50% - 60px);
+    }
