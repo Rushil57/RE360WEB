@@ -1,5 +1,6 @@
 ﻿var app = angular.module('MyAppAdmin', ['toaster', 'ngAnimate'])
-var baseUrl = "https://localhost:7093";
+//var baseUrl = "https://re360webapp.azurewebsites.net";
+var baseUrl = "";
 app.controller('AdminController', function ($scope, $http, $window, $timeout,toaster) {
     $scope.init = function () {
         $scope.UserName = "";
@@ -24,13 +25,16 @@ app.controller('AdminController', function ($scope, $http, $window, $timeout,toa
                     $window.location.href = data.url;
                 } else {
                     $scope.popError(data.message);
+                    //swal("Error!", data.message, "error");
                 }
             });
             post.error(function (data, status) {
                 $scope.stopImgLoader();
                 if (!!data) {
                     $scope.popError(data.message);
+                    //swal("Error!", data.message, "error");
                 } else {
+                    //swal("Error!", 'Something Went Wrong', "error");
                     $scope.popError('Something Went Wrong');
                 }
             });
@@ -70,7 +74,7 @@ app.controller('AdminController', function ($scope, $http, $window, $timeout,toa
             }
         });
         post.error(function (data, status) {
-            $scope.popError('Something Went Wrong');
+            swal("Error!", 'Something Went Wrong', "error");
         });
     }
 });

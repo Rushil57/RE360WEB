@@ -1,6 +1,9 @@
 ﻿var app = angular.module('MyAppAgentReg', ['toaster', 'ngAnimate'])
-var baseUrl = "https://localhost:7093";
+//var baseUrl = "https://re360webapp.azurewebsites.net";
+var baseUrl = "";
 app.controller('AgentRegController', function ($scope, $http, $window, $timeout, toaster) {
+    $scope.imgloader = false;
+    $scope.modalShown = false;
     $scope.init = function (AgentID) {
         $scope.AgentID = "";
         $scope.Model = "";
@@ -29,8 +32,10 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
         });
         post.error(function (data, status) {
             $scope.popError(data.message);
+            //swal("Error!", data.message, "error");
         });
     }
+
     $scope.SaveUser = function () {
         if ($scope.regForm.$valid) {
             $scope.showImgLoader();
@@ -50,17 +55,21 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
                 $scope.stopImgLoader();
                 if (data.status == "200") {
                     $scope.popSuccess(data.message);
+                    //swal("Error!", data.message, "error");
                     $window.location.href = baseUrl + "/Agent/AgentReport";
                 } else {
+                   // swal("Error!", data.message, "error");
                     $scope.popError(data.message);
                 }
             });
             post.error(function (data, status) {
                 $scope.stopImgLoader();
                 if (!!data) {
+                    //swal("Error!", data.message, "error");
                     $scope.popError(data.message);
 
                 } else {
+                    //swal("Error!", 'Something Went Wrong', "error");
                     $scope.popError('Something Went Wrong');
                 }
             });
@@ -95,9 +104,9 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
     $scope.showImgLoader = function () {
         $scope.imgloader = true;
         $scope.gifName = 'Saving...';
-        $timeout(function () {
-            $scope.stopImgLoader();
-        }, 50);
+        //$timeout(function () {
+        //    $scope.stopImgLoader();
+        //}, 5);
     }
     $scope.stopImgLoader = function () {
         $scope.imgloader = false;
@@ -112,6 +121,7 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
             showCloseButton: true,
             toasterId: 'page-validation'
         });
+
     }
     $scope.popSuccess = function (message) {
         toaster.pop({
@@ -138,6 +148,7 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
             }
         });
         post.error(function (data, status) {
+            //swal("Error!", 'Something Went Wrong', "error");
             $scope.popError('Something Went Wrong');
         });
     }
