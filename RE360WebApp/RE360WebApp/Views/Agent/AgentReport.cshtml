@@ -28,9 +28,8 @@
             </div>
             <div class="PrimaryDefault" style="text-align: center; color: white; font-size: 18px; font-family: sans-serif; font-weight: 700; line-height: 24px; word-wrap: break-word">Create Property Details</div>
         </button>
-        <div class="ListOfClient" ng-if="AgentDetail.length>0">
+        <div class="ListOfClient" ng-if="AgentDetail.length> 0 && AgentDetail !=null ">
             <div class="ClientList" ng-repeat="item in AgentDetail | orderBy:'FirstName'">
-                @*ng-if="$index<10"*@
                 <div ng-class="{'ListView':$index%2==0,'ListView2':$index%2!=0}">
                     <br />
                     <div class="UserDetails">
@@ -113,11 +112,9 @@
 
             </div>
         </div>
-        <div ng-if="AgentDetail.length==0">
-            <img src="~/images/7486809.png" />
-            <h2>
-                No Record Found
-            </h2>
+        <div ng-if="AgentDetail.length==0 || AgentDetail ==null ">
+            @*<img src="~/images/7486809.png" />*@
+            <img src="~/images/no property record found.png" style="height: 400px;" />
         </div>
 
         <toaster-container toaster-options="{'toaster-id': 'notification', 'time-out':{ 'toast-warning': 1000, 'toast-error': 0 }}">

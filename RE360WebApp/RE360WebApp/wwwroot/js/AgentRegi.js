@@ -1,18 +1,67 @@
 ﻿var app = angular.module('MyAppAgentReg', ['toaster', 'ngAnimate'])
-//var baseUrl = "https://re360webapp.azurewebsites.net";
+//app.directive('numbersOnly', function () {
+//    return {
+//        require: 'ngModel',
+//        link: function (scope, element, attr, ngModelCtrl) {
+//            function fromUser(text) {
+//                if (text) {
+//                    var transformedInput = text.replace(/[^0-9]/g, '');
+
+//                    if (transformedInput !== text) {
+//                        ngModelCtrl.$setViewValue(transformedInput);
+//                        ngModelCtrl.$render();
+//                    }
+//                    return transformedInput;
+//                }
+//                return undefined;
+//            }
+//            ngModelCtrl.$parsers.push(fromUser);
+//        }
+//    };
+//});
+app.directive('onlyDigits', function () {
+    return {
+        require: 'ngModel',
+        restrict: 'A',
+        link: function (scope, element, attr, ctrl) {
+            function inputValue(val) {
+                if (val) {
+                    var digits = val.replace(/[^0-9.]/g, '');
+
+                    if (digits.split('.').length > 2) {
+                        digits = digits.substring(0, digits.length - 1);
+                    }
+
+                    if (digits !== val) {
+                        ctrl.$setViewValue(digits);
+                        ctrl.$render();
+                    }
+                    return parseFloat(digits);
+                }
+                return undefined;
+            }
+            ctrl.$parsers.push(inputValue);
+        }
+    };
+});
+
 var baseUrl = "";
 app.controller('AgentRegController', function ($scope, $http, $window, $timeout, toaster) {
-    $scope.imgloader = false;
-    $scope.modalShown = false;
+    //$scope.imgloader = false;
+    //$scope.modalShown = false;
+    //$scope.IsEdit = false;
     $scope.init = function (AgentID) {
+        $scope.showImgLoader();
         $scope.AgentID = "";
         $scope.Model = "";
-        $scope.gifName = 'Save';
         $scope.ShowSalePricePer = false;
-        $scope.imgloader = false;
+        //$scope.imgloader = false;
         $scope.AgentID = AgentID;
+
+        /* $scope.IsEdit = false;*/
         $scope.GetBaseUrl()
         $scope.GetUserDetails();
+        $scope.stopImgLoader()
     }
     $scope.GetUserDetails = function () {
         var post = $http({
@@ -24,18 +73,19 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
         });
         post.success(function (data, status) {
             $scope.Model = data.data;
-            if ($scope.AgentID != "" && ($scope.Model.salePricePercantage == null || $scope.Model.salePricePercantage == 0)) {
-                $scope.deletePercentage(true)
-            } else {
-                $scope.deletePercentage(false)
-            }
+            $scope.Header = !!$scope.Model.agentID ? 'Edit Agent' : 'Register Agent';
+            $scope.btnText = !!$scope.Model.agentID ? 'Update' : 'Register';
+            //if ($scope.AgentID != "" && ($scope.Model.salePricePercantage == null || $scope.Model.salePricePercantage == 0)) {
+            //    $scope.deletePercentage(true)
+            //} else {
+            //    $scope.deletePercentage(false)
+            //}
         });
         post.error(function (data, status) {
             $scope.popError(data.message);
             //swal("Error!", data.message, "error");
         });
     }
-
     $scope.SaveUser = function () {
         if ($scope.regForm.$valid) {
             $scope.showImgLoader();
@@ -58,7 +108,7 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
                     //swal("Error!", data.message, "error");
                     $window.location.href = baseUrl + "/Agent/AgentReport";
                 } else {
-                   // swal("Error!", data.message, "error");
+                    // swal("Error!", data.message, "error");
                     $scope.popError(data.message);
                 }
             });
@@ -103,14 +153,12 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
     }
     $scope.showImgLoader = function () {
         $scope.imgloader = true;
-        $scope.gifName = 'Saving...';
         //$timeout(function () {
         //    $scope.stopImgLoader();
         //}, 5);
     }
     $scope.stopImgLoader = function () {
         $scope.imgloader = false;
-        $scope.gifName = 'Save';
     }
     $scope.popError = function (message) {
         toaster.pop({

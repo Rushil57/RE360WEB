@@ -6,10 +6,10 @@ var app = angular.module('MyAppAgentReport', ['toaster', 'ngAnimate'])
 
     })
 app.controller('AgentReportController', function ($scope, $http, $window, $timeout, toaster) {
-    $scope.imgloader = false;
+    //$scope.imgloader = false;
+    //$scope.AgentDetail = null;
     $scope.init = function () {
         $scope.GetBaseUrl()
-        $scope.AgentDetail = null;
         $scope.GetAgentReport()
         $scope.filteredTodos = []
         $scope.currentPage = 1

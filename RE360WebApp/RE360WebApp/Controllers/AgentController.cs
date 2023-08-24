@@ -137,8 +137,9 @@ namespace RE360WebApp.Controllers
                             {
                                 //ID = Convert.ToInt32(item["id"].ToString()),
                                 //AgentID = guAgentID,
-                                Percent = Convert.ToInt32(item["percent"].ToString()),
-                                UpToAmount = !string.IsNullOrEmpty(item["upToAmount"].ToString()) ? Convert.ToDecimal(item["upToAmount"].ToString()) : 0,
+                                //Percent = Convert.ToInt32(item["percent"].ToString()),
+                                Percent = !string.IsNullOrEmpty(item["percent"].ToString()) ? Convert.ToDecimal(item["percent"].ToString()) : null,
+                                UpToAmount = !string.IsNullOrEmpty(item["upToAmount"].ToString()) ? Convert.ToDecimal(item["upToAmount"].ToString()) : null,
                                 Sequence = Convert.ToInt32(item["sequence"].ToString())
                             });
                         }
