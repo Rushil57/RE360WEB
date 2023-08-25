@@ -118,7 +118,7 @@ namespace RE360WebApp.Controllers
                             }
                             if (!string.IsNullOrEmpty(item["SalePricePercantage"].ToString().ToString()) && Convert.ToDecimal(item["SalePricePercantage"].ToString()) != 0)
                             {
-                                userDetailModel.SalePricePercantage = Convert.ToInt32(item["SalePricePercantage"].ToString());
+                                userDetailModel.SalePricePercantage = Convert.ToDecimal(item["SalePricePercantage"].ToString());
                             }
                             if (!string.IsNullOrEmpty(item["MinimumCommission"].ToString().ToString()) && Convert.ToDecimal(item["MinimumCommission"].ToString()) != 0)
                             {

@@ -30,12 +30,12 @@
                 <div class="FormFields" style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 24px; display: flex">
                     <div class="DefaultFormFields">
                         <input type="email" id="txtEmail" name="email" ng-disabled="AgentID!=''" ng-model="Model.email" ng-pattern="/^[^\s]+[^\s]+\.[^\s]{2,}$/" required placeholder="Email ID" class="DefaultFormFieldsLabel" />
-                        <span class="text-danger" ng-show="(regForm.$submitted || regForm.email.$touched) && regForm.email.$error.required">Email ID is required.</span>
-                        <span class="text-danger" ng-show="regForm.email.$dirty && regForm.email.$error.pattern">Please Enter Valid Email.</span>
+                        <div class="text-danger" ng-show="(regForm.$submitted || regForm.email.$touched) && regForm.email.$error.required">Email ID is required.</div>
+                        <div class="text-danger" ng-show="regForm.email.$dirty && regForm.email.$error.pattern">Please Enter Valid Email.</div>
                     </div>
                     <div class="DefaultFormFields">
                         <input type="text" id="txtFirstName" name="firstName" ng-disabled="AgentID!=''" required ng-model="Model.firstName" placeholder="First name" class="DefaultFormFieldsLabel" />
-                        <span class="text-danger" ng-show="(regForm.$submitted || regForm.firstName.$touched) && regForm.firstName.$error.required">First name is required.</span>
+                        <div class="text-danger" ng-show="(regForm.$submitted || regForm.firstName.$touched) && regForm.firstName.$error.required">First name is required.</div>
                     </div>
                     <div class="DefaultFormFields">
                         <input type="text" id="txtLastName" name="lastName" ng-disabled="AgentID!=''" ng-required="true" ng-model="Model.lastName" placeholder="Last name" class="DefaultFormFieldsLabel" />
@@ -76,7 +76,7 @@
                                 <div class="comlbl">
                                     % Of the sale price
                                 </div>
-                                <input type="text" id="txtSalepr" only-digits name="salePricePercantage" ng-model="Model.salePricePercantage" placeholder="% 0.00" class="cmbinp" />
+                                <input type="text" id="txtSalepr" only-digits ng-required="false" name="salePricePercantage" ng-model="Model.salePricePercantage" placeholder="% 0.00" class="cmbinp" />
                             </div>
                             <div style="width: 36px;height: 36px;left: 272px;top: 30.46px;position: absolute;/* transform: rotate(-45deg); *//* transform-origin: 0 0; */">
                                 <img src="~/images/delete.png" ng-click="deletePercentage(true)" />
@@ -99,14 +99,14 @@
                             </div>
                             <div class="priceDv" id="pricedv1" style="display:block;">
                                 <div class="perdv">
-                                    <input type="text" id="txtutoperc" only-digits name="item.percent{{$index}}" ng-model="item.percent" placeholder="% 0.00" class="cmbinp" />
+                                    <input type="text" only-digits ng-required="false" id="txtutoperc" name="item.percent{{$index}}" ng-model="item.percent" placeholder="% 0.00" class="cmbinp" />
                                 </div>
                                 <div class="upto2">
                                     <div class="uptocls"> <span ng-bind="$index==Model.commisions.length-1?'There after':'Up to'"></span>  </div>
                                 </div>
                                 <div ng-hide="$index==Model.commisions.length-1">
                                     <div class="comldv">
-                                        <input type="text" id="txtutoamnt" only-digits name="item.upToAmount{{$index}}" ng-model="item.upToAmount" placeholder="$ 0.00" class="cmbinp" />
+                                        <input type="text" only-digits ng-required="false" id="txtutoamnt" name="item.upToAmount{{$index}}" ng-model="item.upToAmount" placeholder="$ 0.00" class="cmbinp" />
                                     </div>
                                     <div class="delcls">
                                         <img src="~/images/delete.png" ng-click="DeleteCommision(item)" />
@@ -125,7 +125,7 @@
                             <div class="comlbl">
                                 Minimum Commission (excl. GST) (Optional)
                             </div>
-                            <input type="text" id="txtComms" only-digits name="minimumCommission" ng-model="Model.minimumCommission" placeholder="$ 0.00" style="width:308px; align-self: stretch; padding: 12px; background: #FBFBFA; border-radius: 8px; border: 0.60px #AFAFAD solid; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex" />
+                            <input type="text" id="txtComms" only-digits ng-required="false" name="minimumCommission" ng-model="Model.minimumCommission" placeholder="$ 0.00" style="width:308px; align-self: stretch; padding: 12px; background: #FBFBFA; border-radius: 8px; border: 0.60px #AFAFAD solid; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex" />
                         </div>
                     </div>
                     <div class="CheckboxAcceptConditions" style="justify-content: flex-start;/* align-items: center; */gap: 20px;display: inline-flex">
@@ -136,6 +136,7 @@
                         <div class="AcceptText" style="/*border-bottom: 0.30px #001F49 solid;*/ justify-content: flex-start; align-items: center; gap: 4px; display: flex">
                             <a href="#" class="IAcceptAllTermsAndConditions" style="color: #001F49; font-size: 16px; font-family: sans-serif; font-weight: 500; line-height: 24px; word-wrap: break-word">
                                 I accept all terms and conditions.
+                            </a>
                         </div>
                     </div>
                 </div>
