@@ -1,11 +1,10 @@
 ﻿var app = angular.module('MyAppAdmin', ['toaster', 'ngAnimate'])
-//var baseUrl = "https://re360webapp.azurewebsites.net";
-var baseUrl = "";
-app.controller('AdminController', function ($scope, $http, $window, $timeout,toaster) {
+app.controller('AdminController', function ($scope, $http, $window, $timeout, toaster) {
     $scope.init = function () {
         $scope.UserName = "";
         $scope.Password = "";
         $scope.imgloader = false;
+        $scope.baseUrl = "";
         $scope.GetBaseUrl()
     }
     $scope.LoginAdmin = function () {
@@ -22,7 +21,7 @@ app.controller('AdminController', function ($scope, $http, $window, $timeout,toa
             post.success(function (data, status) {
                 $scope.stopImgLoader();
                 if (data.status == "200") {
-                    $window.location.href = data.url;
+                    $window.location.href = $scope.baseUrl + "/Agent/AgentReport";
                 } else {
                     $scope.popError(data.message);
                     //swal("Error!", data.message, "error");
@@ -41,14 +40,14 @@ app.controller('AdminController', function ($scope, $http, $window, $timeout,toa
         }
     }
     $scope.showImgLoader = function () {
-        $scope.imgloader = true;
+        //$scope.imgloader = true;
 
         //$timeout(function () {
         //    $scope.stopImgLoader();
         //}, 5000);
     }
     $scope.stopImgLoader = function () {
-        $scope.imgloader = false;
+        //$scope.imgloader = false;
     }
     $scope.popError = function (message) {
         toaster.pop({
@@ -70,11 +69,11 @@ app.controller('AdminController', function ($scope, $http, $window, $timeout,toa
         });
         post.success(function (data, status) {
             if (data.data != null) {
-                baseUrl = data;
+                $scope.baseUrl = data;
             }
         });
         post.error(function (data, status) {
-            swal("Error!", 'Something Went Wrong', "error");
+            $scope.popError('Something Went Wrong');
         });
     }
 });

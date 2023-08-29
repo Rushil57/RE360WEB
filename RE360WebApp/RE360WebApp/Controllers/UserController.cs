@@ -26,13 +26,12 @@ namespace RE360WebApp.Controllers
             _configuration = configuration;
             UserName = _configuration.GetValue<string>("AdminCredentials:UserName").ToString();
             Password = _configuration.GetValue<string>("AdminCredentials:Password").ToString();
-            baseUrl = _configuration.GetValue<string>("BaseUrl").ToString();
         }
         public async Task<IActionResult> Index()
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> LoginAdmin([FromBody] APIRequestModel model)
         {
@@ -56,7 +55,7 @@ namespace RE360WebApp.Controllers
                         {
                             HttpContext.Session.SetString("UserName", admin.UserName);
                             HttpContext.Session.SetString("Password", admin.Password);
-                            return Ok(new { status = StatusCodes.Status200OK, url = baseUrl + "Agent/AgentReport" });
+                            return Ok(new { status = StatusCodes.Status200OK });
                         }
                         else
                         {

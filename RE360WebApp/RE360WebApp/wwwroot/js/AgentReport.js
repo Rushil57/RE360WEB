@@ -6,9 +6,10 @@ var app = angular.module('MyAppAgentReport', ['toaster', 'ngAnimate'])
 
     })
 app.controller('AgentReportController', function ($scope, $http, $window, $timeout, toaster) {
-    //$scope.imgloader = false;
+    
     //$scope.AgentDetail = null;
     $scope.init = function () {
+        $scope.showImgLoader();
         $scope.GetBaseUrl()
         $scope.GetAgentReport()
         $scope.filteredTodos = []
@@ -61,9 +62,9 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
     }
     $scope.showImgLoader = function () {
         $scope.imgloader = true;
-        //$timeout(function () {
-        //    $scope.stopImgLoader();
-        //}, 5);
+        $timeout(function () {
+            $scope.stopImgLoader();
+        }, 5);
     }
     $scope.stopImgLoader = function () {
         $scope.imgloader = false;
@@ -137,7 +138,6 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             //swal("Error!", 'Something Went Wrong', "error");
         });
     }
-
     $scope.DeleteAgentByID = function (AgentID) {
         swal({
             title: "Are you sure?",
@@ -164,5 +164,11 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
 
             //};
         });
+    }
+    $scope.AddNewAgent = function () {
+        $window.location.href = baseUrl + "/Agent/AgentRegistration";
+    }
+    $scope.Logout = function () {
+        $window.location.href = baseUrl + "/User/Index";
     }
 });

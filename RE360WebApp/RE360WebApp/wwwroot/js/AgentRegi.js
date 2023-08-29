@@ -182,6 +182,12 @@ app.controller('AgentRegController', function ($scope, $http, $window, $timeout,
         });
 
     }
+    $scope.Back = function () {
+        $window.location.href = baseUrl + "/Agent/AgentReport";
+    }
+    $scope.Logout = function () {
+        $window.location.href = baseUrl + "/User/Index";
+    }
     $scope.GetBaseUrl = function () {
         var post = $http({
             method: "GET",
