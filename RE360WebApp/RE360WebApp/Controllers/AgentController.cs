@@ -90,6 +90,10 @@ namespace RE360WebApp.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> TermsandCondition()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> GetAgentByID(string AgentID)
         {
