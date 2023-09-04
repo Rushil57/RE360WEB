@@ -18,13 +18,47 @@
     <style>
         .main {
             /* width: 300px;
-                                                        height: 90px;*/
+                                                                                                                        height: 90px;*/
             /*background-color: #666;*/
             overflow-x: auto;
             overflow-y: hidden;
-            /*border: 1px solid red;*/
+            border: 1px solid red;
             margin: 50px 200px 0px 200px;
             border-radius: 15px;
+            background-color: #fff;
+        }
+
+        .block_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            /* border: 1px solid red; */
+            height: 581px;
+            /* float: left; */
+            /* background: white; */
+            /* background: #fff url('./images/final-splash-image.png') bottom center no-repeat; */
+            background: #fff url('../../images/final-splash-image.png') bottom center no-repeat;
+            background-size: 100% 153px;
+        }
+
+        #page_container {
+            /* position: absolute; */
+            /*  top: 120px;
+                                                                                    left: 280px;
+                                                                                    right: 30px; */
+            border-radius: 15px;
+            box-shadow: 1px 1px 12px #fff;
+            /* height: 581px; */
+            /* overflow: auto; */
+            /* border: 1px solid red; */
+            margin: 50px 200px 0px 200px;
+            background: white;
+            /* width:50%; */
+            height: 581px;
         }
 
         #childWrapper {
@@ -45,14 +79,71 @@
                 height: 50%;
             }
 
-                #childWrapper > li > div > img {
-                    width: 200px;
-                    height: 200px;
-                    margin: 0;
-                    padding: 0;
-                    margin-left: calc(50% - 100px);
-                    margin-top: calc(50% - 100px);
-                }
+        .col-img {
+            display: block;
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+
+        .col-form {
+            display: block;
+            float: left;
+            width: 50%;
+        }
+
+        .imglogo {
+            width: 200px;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+            /* margin-left: calc(50% - 100px);
+                    margin-top: calc(50% - 100px); */
+        }
+
+        @@media(max-width:1400px) {
+            .col-img {
+                display: none;
+            }
+        }
+
+        @@media(max-width:900px) {
+            #page_container {
+                margin: 20px 150px 20px 150px;
+            }
+        }
+
+        @@media(max-width:800px) {
+            #page_container {
+                margin: 20px 80px 20px 80px;
+            }
+        }
+
+        @@media(max-width:700px) {
+            #page_container {
+                margin: 20px 55px 20px 55px;
+            }
+        }
+
+        @@media(max-width:600px) {
+            #page_container {
+                margin: 20px 25px 20px 25px;
+            }
+        }
+
+        @@media(max-width:500px) {
+            #page_container {
+                margin: 0;
+            }
+
+            .AdminFormFieldsLabel {
+                width: 320px;
+            }
+
+            .Adnloginbtn {
+                width: 355px;
+            }
+        }
 
         .lgncls {
             width: 100%;
@@ -66,73 +157,61 @@
             display: inline-flex;
             /*border: 1px solid green;*/
         }
+
+        /*  #page_container .block_container {
+                                                background: #D0D0CD url('./images/final-splash-image.png') bottom right no-repeat;
+                                            } */
+
+
     </style>
 </head>
 <body style="background-color: #eeeeee;font-family: sans-serif;">
-    <div class="main" ng-app="MyAppAdmin" ng-controller="AdminController" ng-init="init()" style="background-color:#fff;">
-        <img src="/images/final-splash-image.png" style="
-    position: absolute;
-    left: 208px;
-    right: 208px;
-    bottom: 117px;
-    height: 20%;
-    width: -webkit-fill-available;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-">
-        <ul id="childWrapper">
-            <li>
-                <div>
-                    @*<img src="~/images/re360main2.jpeg" />*@<img src="~/images/logore360.png" />
-                    @*<img src="~/images/final-splash-image.png" />*@
+    <div id="page_container" ng-app="MyAppAdmin" ng-controller="AdminController" ng-init="init()">
+        <div class="block_container">
+            <div class="col-img">
+                <div style="width:100%;height:100%;display: flex;justify-content: center;align-items: center;">
+                    <img class="imglogo" src="/images/logore360.png">
                 </div>
-            </li>
-            <li>
-                <div>
-                    <div class="lgncls" style="height: 656px; padding-bottom: 41px; background: white; flex-direction: column; justify-content: flex-start; align-items: center; gap: 40px; display: inline-flex">
-                        <div>
-                            @* <div class="OfficialLogoAdmin">
-                            <div class="Group" style="width: 117.80px; height: 117.80px; position: relative">
-                            <img src="~/images/logore360.png" />
-                            </div>
-                            </div>*@
-                            <div class="TitleLogin">
-                                <div class="Register">LOGIN</div>
-
-                            </div>
-                            <br />
-                            <br />
-                            <br />
-                            <br />
-                            <div class="AdminForm">
-                                <form name="regForm" novalidate>
-                                    <div class="FormFields" style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 24px; display: flex">
-                                        <div class="DefaultFormFields">
-                                            <input type="text" id="txtUserName" autocomplete="off" name="UserName" ng-model="UserName" required placeholder="User Name" class="AdminFormFieldsLabel" />
-                                            <div class="text-danger" ng-show="(regForm.$submitted || regForm.UserName.$touched) && regForm.UserName.$error.required">User Name is required.</div>
-                                        </div>
-                                        <div class="DefaultFormFields">
-                                            <input type="password" id="txtPassword" name="password" required ng-model="Password" placeholder="Password" class="AdminFormFieldsLabel" />
-                                            <div class="text-danger" ng-show="(regForm.$submitted || regForm.password.$touched) && regForm.password.$error.required">Password is required.</div>
-                                        </div>
-                                    </div>
-                                    <br />
-                                    <button type="submit" ng-click="LoginAdmin()" class="Adnloginbtn">
-                                        <div class="PrimaryDefault" style="flex: 1 1 0; text-align: center; color: white; font-size: 18px; font-family: sans-serif; font-weight: 700; line-height: 24px; word-wrap: break-word">
-                                            Login
-                                        </div>
-                                    </button>
-                                </form>
-                            </div>
-                            <div ng-show="imgloader" class="preloader">
-                                <img src="~/images/loadernew.gif" ng-show="imgloader" />
-                            </div>
+            </div>
+            <div class="col-form">
+                <div class="lgncls" style="padding: 0;margin: 0px 0 139px 0;flex-direction: column;justify-content: flex-start;align-items: center;gap: 40px;display: inline-flex;">
+                    <div>
+                        <div class="TitleLogin">
+                            <div class="Register">LOGIN</div>
 
                         </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="AdminForm">
+                            <form name="regForm" novalidate>
+                                <div class="FormFields" style="flex-direction: column; justify-content: center; align-items: center; gap: 24px; display: flex">
+                                    <div class="DefaultFormFields">
+                                        <input type="text" id="txtUserName" autocomplete="off" name="UserName" ng-model="UserName" required placeholder="User Name" class="AdminFormFieldsLabel" />
+                                        <div class="text-danger" ng-show="(regForm.$submitted || regForm.UserName.$touched) && regForm.UserName.$error.required">User Name is required.</div>
+                                    </div>
+                                    <div class="DefaultFormFields">
+                                        <input type="password" id="txtPassword" name="password" required ng-model="Password" placeholder="Password" class="AdminFormFieldsLabel" />
+                                        <div class="text-danger" ng-show="(regForm.$submitted || regForm.password.$touched) && regForm.password.$error.required">Password is required.</div>
+                                    </div>
+                                </div>
+                                <br />
+                                <button type="submit" ng-click="LoginAdmin()" class="Adnloginbtn">
+                                    <div class="PrimaryDefault" style="flex: 1 1 0; text-align: center; color: white; font-size: 18px; font-family: sans-serif; font-weight: 700; line-height: 24px; word-wrap: break-word">
+                                        Login
+                                    </div>
+                                </button>
+                            </form>
+                        </div>
+                        <div ng-show="imgloader" class="preloader">
+                            <img src="~/images/loadernew.gif" />
+                        </div>
+
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
         <center>
             <toaster-container toaster-options="{'toaster-id': 'notification', 'time-out':{ 'toast-warning': 1000, 'toast-error': 0 }}">
             </toaster-container>

@@ -32,6 +32,16 @@ namespace RE360WebApp.Controllers
             return View();
         }
 
+        public async Task<IActionResult> AgentDocView(string pid)
+        {
+            string url = "";
+            //if (!string.IsNullOrEmpty(pid) && Convert.ToInt32(pid) > 0)
+            //{
+                url = "https://re360devstoragev2.blob.core.windows.net/test/" + pid + ".pdf";
+            //}
+            return View((object)url);
+        }
+
         [HttpPost]
         public async Task<IActionResult> LoginAdmin([FromBody] APIRequestModel model)
         {
@@ -86,6 +96,7 @@ namespace RE360WebApp.Controllers
 
             return Ok(baseUrl);
         }
+
 
     }
 }

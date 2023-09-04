@@ -37,6 +37,7 @@
     align-items: center;
     gap: 16px;
     display: inline-flex;
+    padding: 0 10px;
 }
 
 .ClientList {
@@ -240,7 +241,7 @@ body {
     overflow: hidden;
     /*border-radius: 15px;*/
     /*border: 1px solid red;*/
-    height: 653px;
+    height: 617px;
 }
 
   /*  #childWrapper > li {
@@ -263,12 +264,12 @@ body {
     float: left;
     height: 50%;
 }
-  #childWrapper > li > div > img {
-            width: 100%;
-            height: 653px;
-            margin: 0;
-            padding: 0;
-        }
+#childWrapper > li > div > img {
+    width: 100%;
+    height: 617px;
+    margin: 0;
+    padding: 0;
+}
 
 
       /*  #childWrapper > li > div > img {

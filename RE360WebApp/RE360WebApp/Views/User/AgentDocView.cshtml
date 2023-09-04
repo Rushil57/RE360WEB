@@ -1,0 +1,71 @@
+﻿@model string
+<iframe src="@Model"
+        onload="javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+&quot;px&quot;;}(this));"
+        style="height: 731px;width:100%;border:none;overflow:hidden;">
+    <p>No Data Found.</p>
+</iframe>
+
+@* <center>
+    <div>
+        <object type="application/pdf" data="@Model?#zoom=85&scrollbar=0&toolbar=0&navpanes=0">
+            <p>No Data Found.</p>
+        </object>
+    </div>
+</center>*@
+
+@* <div class="row">
+    <div class="col-xs-12 d-flex flex-column-reverse flex-sm-column"> *@
+@* <html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body class="container">
+    <div class="row">
+        <div class="col-xs-12 d-flex flex-column-reverse flex-sm-column">
+            <object width="400" height="500" type="application/pdf" data="@Model?#zoom=85&scrollbar=0&toolbar=0&navpanes=0">
+                <p>No Data Found.</p>
+            </object>
+        </div>
+    </div>
+</body>
+</html>
+ *@
+@* <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <object data="@Model"
+                style="height: 731px;width:100%;border:none;overflow:hidden;">
+        </object>
+    </div>
+</body>
+</html> *@
+
+
+@* <html>
+<head>
+    <style type="text/css">
+        #wrapper {
+            width: 100%;
+            float: left;
+            height: auto;
+            border: 1px solid #5694cf;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <object data="@Model" width="100%" height="100%">
+            <p>
+                Your web browser doesn't have a PDF Plugin. Instead you can <a href="http://partners.adobe.com/public/developer/en/acrobat/PDFOpenParameters.pdf">
+                    Click
+                    here to download the PDF
+                </a>
+            </p>
+        </object>
+    </div>
+</body>
+</html> *@

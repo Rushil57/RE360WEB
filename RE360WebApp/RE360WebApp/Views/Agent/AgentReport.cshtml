@@ -28,7 +28,7 @@
                 <li class="li2">
                     <div style="overflow-y: scroll;max-height: 653px; ">
                         @* <center> *@
-                        <div class="Dashboard" style="width: 100%;height: auto;padding-bottom: 41px;background: white;flex-direction: column;justify-content: flex-start;align-items: center;gap: 40px;display: inline-flex;/* border: 1px solid black; */">
+                        <div class="Dashboard" style="width: auto;height: auto;padding-bottom: 41px;background: white;flex-direction: column;justify-content: flex-start;align-items: center;gap: 40px;display: inline-flex;/* border: 1px solid black; */">
                                 <div class="TitleRegister">
                                     <div class="Register"><span>Agent List</span> </div>
                                     <br>
@@ -122,8 +122,8 @@
             </ul>
         </div>
     </div>
-    <div ng-show="imgloader" class="preloader">
-        <img src="~/images/loadernew.gif" ng-show="imgloader" />
+    <div ng-class="{'preloader':imgloader,'':imgloader}"> 
+        <img src="~/images/loadernew.gif" ng-if="imgloader" />
     </div>
 </div>
 

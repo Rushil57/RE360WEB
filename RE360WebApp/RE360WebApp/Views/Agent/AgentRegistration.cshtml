@@ -163,20 +163,20 @@
                 </form>
             </div>
         </div>
-       @*  <div>
-            <center>
-                <toaster-container toaster-options="{'toaster-id': 'notification', 'time-out':{ 'toast-warning': 1000, 'toast-error': 0 }}">
-                </toaster-container>
-                <toaster-container toaster-options="{'toaster-id': 'page-validation', 'position-class': 'toast-center', 'limit': 5}">
-                </toaster-container>
-                <script type='text/ng-template' id='validation-error-toast.html'>
-                    {{totalErrors}} Errors found
-                    <button class="toast-button" ng-click="more()">More</button>
-                </script>
-            </center>
+        @*  <div>
+        <center>
+        <toaster-container toaster-options="{'toaster-id': 'notification', 'time-out':{ 'toast-warning': 1000, 'toast-error': 0 }}">
+        </toaster-container>
+        <toaster-container toaster-options="{'toaster-id': 'page-validation', 'position-class': 'toast-center', 'limit': 5}">
+        </toaster-container>
+        <script type='text/ng-template' id='validation-error-toast.html'>
+        {{totalErrors}} Errors found
+        <button class="toast-button" ng-click="more()">More</button>
+        </script>
+        </center>
         </div> *@
-        <div ng-show="imgloader" class="preloader">
-            <img src="~/images/loadernew.gif" ng-show="imgloader" />
+        <div ng-class="{'preloader':imgloader,'':imgloader}">
+            <img src="~/images/loadernew.gif" ng-if="imgloader" />
         </div>
     </div>
 </div>

@@ -30,7 +30,7 @@ app.directive('onlyDigits', function () {
 //var baseUrl = "https://localhost:7093";
 app.controller('MyController', function ($scope, $http, $window, $interval, $timeout, toaster, $interval) {
     $scope.init = function () {
-        $scope.imgloader = true;
+        //$scope.imgloader = true;
         $scope.baseUrl = "";
         $scope.GetBaseUrl();
     }
@@ -41,6 +41,8 @@ app.controller('MyController', function ($scope, $http, $window, $interval, $tim
             dataType: 'json',
             data: null,
             headers: { "Content-Type": "application/json" }
+        });
+        post.then(function (data, status) {
         });
         post.success(function (data, status) {
             if (data.data != null) {
@@ -57,9 +59,7 @@ app.controller('MyController', function ($scope, $http, $window, $interval, $tim
         $scope.imgloader = true;
     }
     $scope.stopImgLoader = function () {
-        $interval(function () {
-            $scope.imgloader = false;
-        }, 10);
+        $scope.imgloader = false;
     }
     $scope.popError = function (message) {
         toaster.pop({
@@ -84,7 +84,7 @@ app.controller('MyController', function ($scope, $http, $window, $interval, $tim
 });
 
 app.controller('AgentReportController', function ($scope, $http, $window, $timeout, toaster, $interval) {
-
+    
     $scope.init = function () {
         $scope.GetAgentReport()
         $scope.filteredTodos = []
@@ -93,13 +93,15 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
         $scope.maxSize = 5;
     }
     $scope.GetAgentReport = function () {
-        //$scope.showImgLoader();
+        $scope.showImgLoader();
         var post = $http({
             method: "POST",
             url: "/Agent/GetAgentReport",
             dataType: 'json',
             data: null,
             headers: { "Content-Type": "application/json" }
+        });
+        post.then(function (data, status) {
         });
         post.success(function (data, status) {
             if (data.data != null) {
@@ -110,15 +112,13 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             $scope.stopImgLoader();
         });
         post.error(function (data, status) {
-            $scope.stopImgLoader();
             if (!!data) {
                 $scope.popError(data.message);
-                //swal("Error!", data.message, "error");
             } else {
                 $scope.popError('Something Went Wrong');
-                //swal("Error!", 'Something Went Wrong', "error");
             }
             $scope.AgentDetail = null;
+            $scope.stopImgLoader();
         });
     }
     $scope.redirectRegi = function (AgentID) {
@@ -149,14 +149,15 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             }
         });
         post.error(function (data, status) {
-            swal("Error!", data.message, "error");
+            //swal("Error!", data.message, "error");
+            $scope.popError(data.message);
         });
     }
 
     $scope.DeleteAgentByID = function (AgentID) {
         swal({
-            title: "Are you sure?",
-            text: "Your will not be able to recover this Agent!",
+            title: "Delete!",
+            text: "Are you sure you want to delete this Agent?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55", confirmButtonText: "Yes",
@@ -192,7 +193,7 @@ app.controller('AgentRegController', function ($scope, $http, $window, $interval
         $scope.ShowSalePricePer = false;
         $scope.AgentID = AgentID;
         $scope.GetUserDetails();
-        $scope.stopImgLoader()
+        /*$scope.stopImgLoader()*/
     }
     $scope.GetUserDetails = function () {
         var post = $http({
@@ -201,6 +202,8 @@ app.controller('AgentRegController', function ($scope, $http, $window, $interval
             dataType: 'json',
             data: null,
             headers: { "Content-Type": "application/json" }
+        });
+        post.then(function (data, status) {
         });
         post.success(function (data, status) {
             $scope.Model = data.data;
@@ -232,14 +235,12 @@ app.controller('AgentRegController', function ($scope, $http, $window, $interval
                 data: JSON.stringify({ "Parameter": JSON.stringify($scope.Model) }),
                 headers: { "Content-Type": "application/json" }
             });
+            post.then(function (data, status) {
+            });
             post.success(function (data, status) {
                 $scope.stopImgLoader();
                 if (data.status == "200") {
                     $scope.popSuccess(data.message);
-                    //swal("Error!", data.message, "error");
-                    //$interval(function () {
-                    //    getNotifications();
-                    //}, 1000);
                     $interval(function () {
                         $window.location.href = $scope.baseUrl + "/Agent/AgentReport";
                     }, 5);
@@ -259,6 +260,7 @@ app.controller('AgentRegController', function ($scope, $http, $window, $interval
                     //swal("Error!", 'Something Went Wrong', "error");
                     $scope.popError('Something Went Wrong');
                 }
+
             });
         }
     }
