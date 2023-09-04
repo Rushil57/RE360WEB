@@ -27,7 +27,6 @@ app.directive('onlyDigits', function () {
         }
     };
 });
-//var baseUrl = "https://localhost:7093";
 app.controller('MyController', function ($scope, $http, $window, $interval, $timeout, toaster, $interval) {
     $scope.init = function () {
         //$scope.imgloader = true;
@@ -80,6 +79,9 @@ app.controller('MyController', function ($scope, $http, $window, $interval, $tim
             showCloseButton: true,
             toasterId: 'page-validation'
         });
+    }
+    $scope.Logout = function () {
+        $window.location.href = $scope.baseUrl + "/User/Index";
     }
 });
 
@@ -137,6 +139,8 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             data: null,
             headers: { "Content-Type": "application/json" }
         });
+        post.then(function (data, status) {
+        });
         post.success(function (data, status) {
 
             if (data.status == "200") {
@@ -181,9 +185,7 @@ app.controller('AgentReportController', function ($scope, $http, $window, $timeo
             //};
         });
     }
-    $scope.Logout = function () {
-        $window.location.href = $scope.baseUrl + "/User/Index";
-    }
+    
 });
 
 app.controller('AgentRegController', function ($scope, $http, $window, $interval, $timeout, toaster, $interval) {
@@ -293,47 +295,6 @@ app.controller('AgentRegController', function ($scope, $http, $window, $interval
     $scope.Back = function () {
         $window.location.href = $scope.baseUrl + "/Agent/AgentReport";
     }
-    $scope.Logout = function () {
-        $window.location.href = $scope.baseUrl + "/User/Index";
-    }
 
 });
 
-//app.controller('AdminController', function ($scope, $http, $window, $timeout, toaster) {
-//    $scope.init = function () {
-//        $scope.UserName = "";
-//        $scope.Password = "";
-//        $scope.imgloader = false;
-//        //$scope.baseUrl = "";
-//        //$scope.GetBaseUrl()
-//    }
-//    $scope.LoginAdmin = function () {
-//        if ($scope.regForm.$valid) {
-//            $scope.showImgLoader();
-//            var Admin = { UserName: $scope.UserName, Password: $scope.Password }
-//            var post = $http({
-//                method: "POST",
-//                url: "/User/LoginAdmin",
-//                dataType: 'json',
-//                data: JSON.stringify({ "Parameter": JSON.stringify(Admin) }),
-//                headers: { "Content-Type": "application/json" }
-//            });
-//            post.success(function (data, status) {
-//                $scope.stopImgLoader();
-//                if (data.status == "200") {
-//                    $window.location.href = $scope.baseUrl + "/Agent/AgentReport";
-//                } else {
-//                    $scope.popError(data.message);
-//                }
-//            });
-//            post.error(function (data, status) {
-//                $scope.stopImgLoader();
-//                if (!!data) {
-//                    $scope.popError(data.message);
-//                } else {
-//                    $scope.popError('Something Went Wrong');
-//                }
-//            });
-//        }
-//    }
-//});
